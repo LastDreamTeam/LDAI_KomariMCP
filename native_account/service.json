@@ -1,0 +1,22 @@
+{
+  "product": "komari",
+  "tool": "komari_list_servers",
+  "description": "列出这个 Komari 账号可见的服务器。",
+  "keys": [
+    "KOMARI_BASE_URL",
+    "KOMARI_API_KEY_FILE"
+  ],
+  "required": [
+    "KOMARI_BASE_URL",
+    "KOMARI_API_KEY_FILE"
+  ],
+  "private_paths": [
+    "KOMARI_API_KEY_FILE"
+  ],
+  "url_keys": [
+    "KOMARI_BASE_URL"
+  ],
+  "entry": "server.py",
+  "args": {},
+  "bound_args": {}
+}
