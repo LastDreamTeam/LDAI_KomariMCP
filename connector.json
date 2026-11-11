@@ -1,0 +1,18 @@
+{
+  "id": "komari",
+  "version": "0.2.0",
+  "repository": "https://github.com/LastDreamTeam/LDAI_KomariMCP",
+  "runtime": "python",
+  "toolPrefixes": [
+    "komari_"
+  ],
+  "providerEnvironment": [
+    "KOMARI_BASE_URL",
+    "KOMARI_API_KEY",
+    "KOMARI_API_KEY_FILE"
+  ],
+  "requiredMulti": [
+    "KOMARI_BASE_URL",
+    "KOMARI_API_KEY_FILE"
+  ]
+}

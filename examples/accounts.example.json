@@ -1,0 +1,17 @@
+{
+  "connector": "komari",
+  "accounts": {
+    "work": {
+      "env": {
+        "KOMARI_BASE_URL": "https://monitor.example.org",
+        "KOMARI_API_KEY_FILE": "/private/work/komari-key"
+      }
+    },
+    "personal": {
+      "env": {
+        "KOMARI_BASE_URL": "https://monitor.example.org",
+        "KOMARI_API_KEY_FILE": "/private/personal/komari-key"
+      }
+    }
+  }
+}

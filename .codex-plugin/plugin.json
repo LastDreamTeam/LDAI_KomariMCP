@@ -1,20 +1,25 @@
 {
   "name": "komari",
-  "version": "0.1.0",
-  "description": "通过 Komari 原生 API 查询主机指标并维护到期日、配额等资产字段。",
+  "version": "0.2.0",
+  "description": "Komari 原生 HTTP API 的独立 MCP 连接器，可查询节点、监控记录和维护到期日、流量配额。",
   "author": {
     "name": "LastDreamTeam"
   },
-  "skills": "./skills",
-  "mcpServers": "./.mcp.json",
+  "repository": "https://github.com/LastDreamTeam/LDAI_KomariMCP",
+  "homepage": "https://github.com/LastDreamTeam/LDAI_KomariMCP",
+  "license": "AGPL-3.0-only",
   "interface": {
     "displayName": "Komari 监控",
-    "shortDescription": "通过 Komari 原生 API 查询主机指标并维护到期日、配额等资产字段。",
+    "shortDescription": "查询监控数据和维护服务器资产",
+    "longDescription": "Komari 原生 HTTP API 的独立 MCP 连接器，可查询节点、监控记录和维护到期日、流量配额。",
     "developerName": "LastDreamTeam",
+    "category": "Data & Analytics",
     "logo": "./assets/icon.svg",
     "composerIcon": "./assets/icon.svg",
     "defaultPrompt": [
-      "检查当前连接状态"
+      "查看主机状态和到期时间"
     ]
-  }
+  },
+  "mcpServers": "./.mcp.json",
+  "skills": "./skills"
 }
