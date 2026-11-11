@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "komari": {
+      "command": "python",
+      "args": [
+        "${PLUGIN_ROOT}/launch.py"
+      ]
+    }
+  }
+}

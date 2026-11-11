@@ -1,0 +1,20 @@
+{
+  "name": "komari",
+  "version": "0.1.0",
+  "description": "通过 Komari 原生 API 查询主机指标并维护到期日、配额等资产字段。",
+  "author": {
+    "name": "LastDreamTeam"
+  },
+  "skills": "./skills",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Komari 监控",
+    "shortDescription": "通过 Komari 原生 API 查询主机指标并维护到期日、配额等资产字段。",
+    "developerName": "LastDreamTeam",
+    "logo": "./assets/icon.svg",
+    "composerIcon": "./assets/icon.svg",
+    "defaultPrompt": [
+      "检查当前连接状态"
+    ]
+  }
+}
