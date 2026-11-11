@@ -1,6 +1,6 @@
 {
   "name": "komari",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Komari 原生 HTTP API 的独立 MCP 连接器，可查询节点、监控记录和维护到期日、流量配额。",
   "author": {
     "name": "LastDreamTeam"

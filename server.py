@@ -159,5 +159,34 @@ def komari_update_server(uuid: UUID, fields: Changes):
         return observed[k] == change[k]
     return {"verified":all(matches(k) for k in change), "previous":previous, "observed":observed}
 
+
+@mcp.tool()
+def komari_search_servers(query:Annotated[str,Field(min_length=1,max_length=128)]):
+    """Find servers by UUID, name, tags, group, region, or remarks."""
+    items=komari_list_servers()
+    if isinstance(items,dict):items=list(items.values())
+    words=query.casefold().split()
+    return [r for r in items if isinstance(r,dict) and all(w in " ".join(str(r.get(k,"")) for k in
+            ("uuid","name","group","tags","region","remark","public_remark")).casefold() for w in words)]
+
+@mcp.tool()
+def komari_traffic(uuid:UUID):
+    """Read agent-reported cumulative byte counters, current byte rates and the configured traffic quota."""
+    info=komari_get_server(uuid) if access_key() else {}
+    report=komari_latest_status(uuid)
+    row=report.get(str(uuid),report) if isinstance(report,dict) else {}
+    return {"uuid":str(uuid),"uploaded_bytes":row.get("net_total_up"),"downloaded_bytes":row.get("net_total_down"),
+            "up_bytes_per_second":row.get("net_out"),"down_bytes_per_second":row.get("net_in"),
+            "quota_bytes":info.get("traffic_limit"),"quota_mode":info.get("traffic_limit_type"),"sample_time":row.get("time")}
+
+@mcp.tool()
+def komari_add_host(name:Annotated[str,Field(min_length=1,max_length=100)]):
+    """Create a client record, verify its UUID and name. Obtain the probe enrollment details in the panel."""
+    if not access_key():raise ValueError("An administrator API key is required.")
+    created=api("/api/rpc2",{"jsonrpc":"2.0","id":1,"method":"admin:addClient","params":{"name":name}})
+    ident=UUID(created["uuid"]);info=komari_get_server(ident)
+    return {"uuid":str(ident),"name":info.get("name"),"verified":info.get("name")==name,
+            "agent_installation":"Open this client in the panel for its enrollment command."}
+
 if __name__ == "__main__":
     mcp.run(transport="stdio")
