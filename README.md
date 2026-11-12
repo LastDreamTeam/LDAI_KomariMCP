@@ -1,4 +1,4 @@
-# Komari 监控 MCP
+# Komari Monitor MCP
 
 > **自用项目** · 本仓库主要供维护者自用。
 

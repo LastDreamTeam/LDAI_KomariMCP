@@ -1,6 +1,6 @@
 {
   "id": "komari",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "repository": "https://github.com/LastDreamTeam/LDAI_KomariMCP",
   "runtime": "python",
   "toolPrefixes": [
@@ -15,7 +15,7 @@
     "KOMARI_BASE_URL",
     "KOMARI_API_KEY_FILE"
   ],
-  "title": "Komari 监控",
+  "title": "Komari Monitor",
   "managerFields": {
     "KOMARI_BASE_URL": "面板地址",
     "KOMARI_API_KEY_FILE": "API Key 文件"
