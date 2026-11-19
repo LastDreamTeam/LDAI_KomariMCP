@@ -2,7 +2,19 @@
 
 > **自用项目** · 本仓库主要供维护者自用。
 
-通过 Komari 原生 API 查询主机指标并维护到期日、配额等资产字段。 本仓库是独立维护的第三方 stdio MCP 连接器。
+[English quick start](#english-quick-start)
+
+从聊天窗口查看自己的 Komari 面板。运维人员可以先按名称找到一台节点，再看它最近上报的 CPU、内存和网络读数。管理员还可以维护资产到期日、流量配额等字段。本仓库独立维护，使用 Komari 原生 API。
+
+## 先看一台节点
+
+在下方完成安装和面板配置后，可以问 Agent：
+
+> 列出当前面板对我可见的节点，让我选一台，再显示它最近的 CPU、内存和网络读数。
+
+`komari_status` 返回面板版本。`komari_list_servers` 列节点，`komari_latest_status` 用所选节点的 UUID 取读数。游客看到的列表取决于面板公开范围；节点列表为空时先在面板上对照同一身份的可见范围。
+
+使用本机 Cursor、DSH 或 Codex 的读者接着看安装步骤。已经部署账号插件的工作站可以直接看[连接与切换面板](native_account/WORKSTATION.md)。
 
 ## 安装运行环境
 
@@ -32,19 +44,6 @@ python client_config.py codex
 
 可重复使用 `--env NAME=VALUE` 传递这些设置：`KOMARI_BASE_URL`、`KOMARI_API_KEY_FILE`。涉及密钥的设置只填写私有文件的路径。在客户端刷新工具后先调用 `komari_status`。各端使用同一个服务入口，克隆到另一台机器时重新生成路径。仓库另附 Codex 插件清单、图标和技能，可用于打包本地插件。若插件被复制到客户端缓存，可通过进程环境 `LDAI_MCP_PYTHON` 指定已安装依赖的 Python 绝对路径。 [Cursor MCP 文档](https://cursor.com/docs/mcp) · [DSH MCP 客户端](https://github.com/deepseek-ai/deepseek-harness/blob/main/packages/mcp/mcp-client/README.zh.md)
 
-## 实现参考
-
-GitHub 数据核对日期为 2026-11-11。
-
-参考社区 Komari MCP 的面板选择与 Bearer 认证方式，并为资产字段更新加入回读。
-
-- [komari-monitor/komari](https://github.com/komari-monitor/komari) · 6,978 stars，默认分支 900 次提交
-- [mogumc/Komari-MCP-Server](https://github.com/mogumc/Komari-MCP-Server) · 5 stars，默认分支 19 次提交
-
-## 许可
-
-本项目以 **GNU Affero General Public License v3.0 only（AGPL-3.0-only）** 发布。分发受许可覆盖的修改版或通过网络向用户提供修改版时，应按许可条款向相应用户提供对应源码。仅在本机自行使用无需公开发布。第三方服务及依赖遵循各自条款。[许可全文](LICENSE)
-
 ## 账号管理窗口
 
 账号版从本插件详情页点「管理」→「已连接的账户」→「连接另一个账户」。已连接账号右侧菜单提供重命名、重新连接和断开连接。
@@ -63,8 +62,23 @@ MCP 入口为 `router.py`，需要 Python 3.11+。主机在本地保存账号配
 
 维护者在 main 提交改进、运行测试，并同步更新 connector.json、两个插件清单的版本，再执行 `python build_plugin.py --push`。此命令将 main 与版本标签一起推送到本仓库，再从已提交文件生成 ZIP。更新既有账号插件时传 `--account-name <既有包名>`，把生成的 ZIP 发布到同一插件。包内 release-source.json 记录精确提交，可与各终端核对。Git 推送与账号插件发布是两个独立步骤。
 
-许可为 **AGPL-3.0-only**。[许可全文](LICENSE)
-
 [原生插件页多账号接入候选版：部署、覆盖范围与验收](native_account/README.md)
 
 使用 Codex 插件页连接、重连和管理多个工作站账号，见[工作站接入](native_account/WORKSTATION.md)。
+
+## English quick start
+
+Point a Python 3.11+ MCP host at your own Komari dashboard. After installing `requirements.txt` in a virtual environment, run `python client_config.py cursor --env KOMARI_BASE_URL=https://monitor.example.org` with your dashboard URL. Merge the generated entry into Cursor, reload the tools, and call `komari_status` to see the dashboard version. List visible nodes with `komari_list_servers`. To read private inventory, pass an authorized panel key through `KOMARI_API_KEY_FILE` or the process environment variable `KOMARI_API_KEY`.
+
+## 实现参考
+
+GitHub 数据核对日期为 2026-11-11。
+
+参考社区 Komari MCP 的面板选择与 Bearer 认证方式，并为资产字段更新加入回读。
+
+- [komari-monitor/komari](https://github.com/komari-monitor/komari) · 6,978 stars，默认分支 900 次提交
+- [mogumc/Komari-MCP-Server](https://github.com/mogumc/Komari-MCP-Server) · 5 stars，默认分支 19 次提交
+
+## 许可
+
+本项目以 **GNU Affero General Public License v3.0 only（AGPL-3.0-only）** 发布。分发受许可覆盖的修改版或通过网络向用户提供修改版时，应按许可条款向相应用户提供对应源码。仅在本机自行使用无需公开发布。第三方服务及依赖遵循各自条款。[许可全文](LICENSE)
